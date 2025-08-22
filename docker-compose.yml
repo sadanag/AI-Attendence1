@@ -1,0 +1,53 @@
+version: "3.9"
+services:
+  mongo:
+    image: mongo:6
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./_data/mongo:/data/db
+
+  ai-service:
+    build: ./ai-service
+    restart: unless-stopped
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/attendai
+      - CORS_ORIGINS=*
+    depends_on:
+      - mongo
+    ports:
+      - "8000:8000"
+
+  backend:
+    build:
+      context: ./backend/backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - PORT=2000
+      - MONGO_URI=mongodb://mongo:27017/employee_attendance
+      - JWT_SECRET=change_this_to_a_long_random_secret
+      - DS_API_URL=http://ai-service:8000/api/v1/verify-pair
+      - FACE_MATCH_THRESHOLD=0.8
+      - SAP_API_URL=https://sap-server/sap/opu/odata/SAP/ZEMP_ATTENDANCE_SRV/AttendanceSet
+      - SAP_USER=mySapUser
+      - SAP_PASS=mySapPass
+      - RETENTION_DAYS=30
+    depends_on:
+      - mongo
+      - ai-service
+    ports:
+      - "2000:2000"
+
+  frontend:
+    build:
+      context: ./frontend/frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://localhost:2000/api
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"

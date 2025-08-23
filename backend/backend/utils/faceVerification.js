@@ -1,9 +1,9 @@
-// // // utils/faceVerification.js
-// // // In real production, integrate with Rekognition / Azure Face / FaceIO / OpenCV
-// // export async function verifyFaces(base64A, base64B) {
-// //   // TODO: implement actual verification. For now, return true.
-// //   return true;
-// // }
+utils/faceVerification.js
+In real production, integrate with Rekognition / Azure Face / FaceIO / OpenCV
+export async function verifyFaces(base64A, base64B) {
+  TODO: implement actual verification. For now, return true.
+  return true;
+}
 
 
 

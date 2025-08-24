@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-export default function ProtectedRoute({ roles = ["employee","Admin"], children }) {
+export default function ProtectedRoute({ roles = ["employee","admin"], children }) {
   const { user } = useAuth();
   const location = useLocation();
 

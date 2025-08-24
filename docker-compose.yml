@@ -29,7 +29,7 @@ services:
       - MONGO_URI=mongodb:mongodb+srv://neelamdheerajkumar:DrNltjHB5DTevVUE@attendance.itpn8hv.mongodb.net/?retryWrites=true&w=majority&appName=Attendance
 
       - JWT_SECRET=change_this_to_a_long_random_secret
-      - DS_API_URL=http://ai-service:8000/api/v1/verify-pair
+      - DS_API_URL=http://65.0.113.64:8000/api/v1/verify-pair
       - FACE_MATCH_THRESHOLD=0.8
       - SAP_API_URL=https://sap-server/sap/opu/odata/SAP/ZEMP_ATTENDANCE_SRV/AttendanceSet
       - SAP_USER=mySapUser
@@ -37,7 +37,7 @@ services:
       - RETENTION_DAYS=30
     depends_on:
       - mongo
-      - ai-service
+      -  face_attendance_ai
     ports:
       - "2000:2000"
 
@@ -46,7 +46,7 @@ services:
       context: ./frontend/frontend
       dockerfile: Dockerfile
       args:
-        - VITE_API_URL=http://localhost:2000/api
+        - VITE_API_URL=http://65.0.113.64:2000/api
     restart: unless-stopped
     depends_on:
       - backend

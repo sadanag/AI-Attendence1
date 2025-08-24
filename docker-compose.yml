@@ -8,14 +8,14 @@ services:
     volumes:
       - ./_data/mongo:/data/db
 
-  ai-service:
-    build: ./ai-service
+  face_attendance_ai:
+    build: ./face_attendance_ai
     restart: unless-stopped
     environment:
-      - MONGO_URI=mongodb://mongo:27017/attendai
+      - MONGO_URI=mongodb:mongodb+srv://neelamdheerajkumar:DrNltjHB5DTevVUE@attendance.itpn8hv.mongodb.net/?retryWrites=true&w=majority&appName=Attendance
+
       - CORS_ORIGINS=*
-    depends_on:
-      - mongo
+   
     ports:
       - "8000:8000"
 
@@ -26,7 +26,8 @@ services:
     restart: unless-stopped
     environment:
       - PORT=2000
-      - MONGO_URI=mongodb://mongo:27017/employee_attendance
+      - MONGO_URI=mongodb:mongodb+srv://neelamdheerajkumar:DrNltjHB5DTevVUE@attendance.itpn8hv.mongodb.net/?retryWrites=true&w=majority&appName=Attendance
+
       - JWT_SECRET=change_this_to_a_long_random_secret
       - DS_API_URL=http://ai-service:8000/api/v1/verify-pair
       - FACE_MATCH_THRESHOLD=0.8

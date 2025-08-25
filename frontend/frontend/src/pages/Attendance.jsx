@@ -98,9 +98,9 @@ export default function Attendance() {
 
   const doAction = async (type) => {
     // if (!photo) return setError("Please capture a photo first");
-    // setError("");
-    // setMsg("");
-    // setLoading(true);
+    setError("");
+    setMsg("");
+    setLoading(true);
 
     try {
       const endpoint =

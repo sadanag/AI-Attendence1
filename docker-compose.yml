@@ -27,7 +27,7 @@ services:
       - MONGO_URI=mongodb+srv://neelamdheerajkumar:DrNltjHB5DTevVUE@attendance.itpn8hv.mongodb.net/?retryWrites=true&w=majority&appName=Attendance
 
       - JWT_SECRET=change_this_to_a_long_random_secret
-      - DS_API_URL=http://54.85.253.162:8000/api/v1/verify-pair  #replace with your ec2 ip
+      - DS_API_URL=http://43.205.94.38:8000/api/v1/verify-pair  #replace with your ec2 ip
       - FACE_MATCH_THRESHOLD=0.8
       - SAP_API_URL=https://sap-server/sap/opu/odata/SAP/ZEMP_ATTENDANCE_SRV/AttendanceSet
       - SAP_USER=mySapUser
@@ -44,7 +44,7 @@ services:
       context: ./frontend/frontend
       dockerfile: Dockerfile
       args:
-        - VITE_API_URL=http://54.85.253.1624:2000/api  #replace with your ec2 ip
+        - VITE_API_URL=http://43.205.94.38:2000/api  #replace with your ec2 ip
     restart: unless-stopped
     depends_on:
       - backend

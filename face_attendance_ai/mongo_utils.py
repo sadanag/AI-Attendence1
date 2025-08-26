@@ -14,7 +14,8 @@ logger = logging.getLogger(__name__)
 class MongoPhotoManager:
     def __init__(self, mongo_uri: str = None):
         """Initialize MongoDB connection for photo management"""
-        self.mongo_uri = mongo_uri or os.getenv('MONGO_URI', 'mongodb://localhost:27017/employee_attendance')
+        self.mongo_uri = mongo_uri or os.getenv('MONGO_URI', 'mongodb+srv://neelamdheerajkumar:DrNltjHB5DTevVUE@attendance.itpn8hv.mongodb.net/?retryWrites=true&w=majority&appName=Attendance
+')
         self.client = None
         self.db = None
         self.employees_collection = None
@@ -24,7 +25,7 @@ class MongoPhotoManager:
         try:
             # If no MONGO_URI provided, connect to local MongoDB
             if not self.mongo_uri:
-                self.client = pymongo.MongoClient('mongodb://localhost:27017/')
+                self.client = pymongo.MongoClient('mongodb://43.205.94.38:27017/')
                 self.db = self.client.employee_attendance
             else:
                 self.client = pymongo.MongoClient(self.mongo_uri)
